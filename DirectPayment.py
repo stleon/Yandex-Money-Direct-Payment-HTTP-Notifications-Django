@@ -14,7 +14,7 @@ import hashlib
 from django.views.decorators.csrf import csrf_exempt
 
 # Secret from Yandex Money account https://sp-money.yandex.ru/myservices/online.xml
-NOTIFICATION_SECRET = 'CbJgZDJ13J7onxBlgDRaRjUE'
+NOTIFICATION_SECRET = 'CbJgZDJ13J7onxBlgDRaRjUE' # this is a fake code, guys, - so, don't even try
 
 # Escaping CSRF for Yandex Money request (cause YM does not have our csrftoken cookie)
 @csrf_exempt
@@ -24,26 +24,27 @@ def HTTPNotifications(request):
 	# Agreement on abbreviations and variables to be used in elements
 	NOTIFICATION_TYPE	= 'notification_type'
 	OPERATION_ID		= 'operation_id'
-	AMOUNT				= 'amount'
-	CURRENCY			= 'currency'
-	DATETIME			= 'datetime'
-	SENDER				= 'sender'
-	CODEPRO				= 'codepro'
-	LABEL				= 'label'
-	SHA1_HASH			= 'sha1_hash'
+	AMOUNT			= 'amount'
+	CURRENCY		= 'currency'
+	DATETIME		= 'datetime'
+	SENDER			= 'sender'
+	CODEPRO			= 'codepro'
+	LABEL			= 'label'
+	SHA1_HASH		= 'sha1_hash'
 	
 	# Agreement on regexp format for each element
 	if request.method == "POST":
 		request_expected_elements = {
 			NOTIFICATION_TYPE:	'^(p2p-incoming)$',			#p2p-incoming
 			OPERATION_ID:		'^([0-9]{1,256})$',			#1234567
-			AMOUNT:				'^([0-9]{1,6}\.[0-9]{2})$',	#300.00
-			CURRENCY:			'^(643)$',					#643
-			DATETIME:			'^([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[A-Z])$',	#2011-07-01T09:00:00Z
-			SENDER:				'^([0-9A-Z]+)$',			#41001XXXXXXXX
-			CODEPRO:			'^(false)$',				#false
-			LABEL:				'^([0-9a-z]{1,256})$',		#hjg314kjh24312769z2187t0ehio
-			SHA1_HASH:			'^([0-9a-z]+)$',			#090a8e7ebb6982a7ad76f4c0f0fa5665d741aafa
+			AMOUNT:			'^([0-9]{1,6}\.[0-9]{2})$',		#300.00
+			CURRENCY:		'^(643)$',				#643
+			DATETIME:		'^([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[A-Z])$',\
+											#2011-07-01T09:00:00Z
+			SENDER:			'^([0-9A-Z]+)$',			#41001XXXXXXXX
+			CODEPRO:		'^(false)$',				#false
+			LABEL:			'^([0-9a-z]{1,256})$',			#hjg314kjh24312769z2187t0ehio
+			SHA1_HASH:		'^([0-9a-z]+)$',			#090a8e7ebb6982a7ad76f4c0f0fa5665d741aafa
 		}
 	
 		input_correct = {}
