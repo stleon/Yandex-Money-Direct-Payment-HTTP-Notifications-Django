@@ -70,8 +70,8 @@ def HTTPNotifications(request):
 				return result
 				
 		# Uncomment for debugging input_values
-		print "input_correct dictionary: ", input_correct
-		print "input_errors dictionary: ", input_errors
+		#print "input_correct dictionary: ", input_correct
+		#print "input_errors dictionary: ", input_errors
 	
 		if input_errors:
 			print "We have not empty dictionary of errors. I do not process this transaction further"
@@ -103,7 +103,7 @@ def HTTPNotifications(request):
 			print "Hash string from Yandex Money not matched! Someone tries to break us"
 			return result
 
-		# Your code for landing money in your system
+		# Code for landing money in our system
 		if AMOUNT in input_correct and LABEL in input_correct:
 			amount = input_correct[AMOUNT]
 			purse_hash = input_correct[LABEL]
@@ -114,6 +114,13 @@ def HTTPNotifications(request):
 				
 				credit_result = Credit(account_id = account_id, amount = amount, object_type = 'purse', object_id = purses_object.id)
 				if credit_result:
+					# Responding to Yandex with success only in this case
 					result = HttpResponse(status=200)
+				else:
+					print "We've got an error during landing money in our system with billing.operations.Credit function. Exception has to be above"
+			else:
+				print "We've got an error during landing money in our system with Purses.objects.Get method. Exception has to be above"
+		else:
+			print "AMOUNT or/and LABEL were not found in Yandex Money request to process money landing, so I do nothing"
 
 	return result
