@@ -1,4 +1,2 @@
-Yandex-Money-HTTP-Notifications-Django
+Yandex Money Direct Payment HTTP Notifications for Django
 ======================================
-
-Yandex Money HTTP Notifications processing in Django
