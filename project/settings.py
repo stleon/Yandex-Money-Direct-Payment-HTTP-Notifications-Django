@@ -152,7 +152,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 INSTALLED_APPS = (
-<<<<<<< HEAD
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
