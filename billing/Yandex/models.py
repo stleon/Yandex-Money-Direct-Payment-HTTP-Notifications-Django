@@ -1,1 +1,1 @@
-from m_directpayment import TransactionsYandexDirectPayment
+from model_directpayment import TransactionsYandexDirectPayment
