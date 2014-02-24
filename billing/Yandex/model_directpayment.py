@@ -112,7 +112,7 @@ class TransactionsYandexDirectPaymentManager(models.Manager):
 						message = "TransactionsYandexDirectPayment.Log warn \
 						Credit operation canceled because we've got protected \
 						transaction for account_id: %s" % account_id
-							Handle(message)
+						Handle(message)
 				else:
 					message = "TransactionsYandexDirectPayment.Log error \
 					Transaction has not CUSTOM key so I don't know what's the purse \
